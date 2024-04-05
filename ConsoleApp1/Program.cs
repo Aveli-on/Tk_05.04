@@ -13,15 +13,15 @@ namespace ConsoleApp1
             switch (tsts)
             {
                 case 1 when bal <= 10 && bal >= 0:
-                    return false;
+                    return true;
                 case 2 when bal <= 50 && bal >= 0:
-                    return false;
+                    return true;
                 case 3 when bal <= 30 && bal >= 0:
-                    return false;
+                    return true;
                 case 4 when bal <= 10 && bal >= 0:
-                    return false;
+                    return true;
             }
-            return true;
+            return false;
         }
         public static int answ(int bal,int q=1)
         {
@@ -38,23 +38,27 @@ namespace ConsoleApp1
             }
             return 6;
         }
-
-        static void Main(string[] args)
-        {
+        public static bool final(int [] a) {
             int sum = 0;
-            int one = 0; 
-            for (int i = 1; i < 5; i++)
+            int one = 0;
+            for (int i = 0; i < 4; i++)
             {
-                Console.WriteLine($"Введите количество баллов за {i} задание");
-                one = int.Parse(Console.ReadLine());
-                while (tst(one, i))
+                string y = a[i].ToString();
+                bool result = int.TryParse(y,out one);
+                if (!tst(one, i+1) || !result)
                 {
-                    Console.WriteLine($"Введите количество баллов за {i} задание( в 1-ом до 10, во 2-ом до 50, в 3-ем до 30, в 4-ом до 10 )");
-                    one = int.Parse(Console.ReadLine());
+                    return false;
                 }
                 sum += one;
             }
             Console.WriteLine($"Набранное количество баллов: {sum}, оценка {answ(sum)}");
+
+
+            return true;
+        }
+        static void Main(string[] args)
+        {
+            
             Console.ReadLine();
         }
     }
